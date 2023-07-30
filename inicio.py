@@ -1,14 +1,7 @@
-import mysql.connector
-
-conexion = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    password="",
-    database=""
-)
+from conexion import conexion
 cursor = conexion.cursor()
 
-#Crear tabla si no existe
+# Create table if it doesn't exist
 cursor.execute('''CREATE TABLE IF NOT EXISTS elementos
                   (id INT AUTO_INCREMENT PRIMARY KEY,
                    elemento VARCHAR(255))''')
@@ -48,7 +41,7 @@ def actualizar_elemento():
         if not elemento:
             print("ID inválido")
         else:
-            nuevo_elemento = input("Ingrese la modificacion: ")
+            nuevo_elemento = input("Ingrese el nuevo elemento: ")
             cursor.execute("UPDATE elementos SET elemento=%s WHERE id=%s", (nuevo_elemento, indice))
             conexion.commit()
             print("Elemento actualizado exitosamente")
